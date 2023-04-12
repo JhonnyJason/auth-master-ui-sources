@@ -1,8 +1,14 @@
-debugmodule = {name: "debugmodule", uimodule: false}
+import { addModulesToDebug } from "thingy-debug"
 
 ############################################################
-debugmodule.modulesToDebug = 
-    unbreaker: true
-    configmodule: true
+export modulesToDebug = {
 
-export default debugmodule
+    # configmodule: true
+    contentmodule: true
+    # messageboxmodule: true
+    # qrdisplaymodule: true
+    # qrreadermodule: true
+    
+}
+
+addModulesToDebug(modulesToDebug)

@@ -1,0 +1,15 @@
+[submodule "source/buttonstylemodule"]
+	path = source/buttonstylemodule
+	url = git@github.com:JhonnyJason/pwa-sources-buttonstylemodule.git
+[submodule "source/messageboxmodule"]
+	path = source/messageboxmodule
+	url = git@github.com:JhonnyJason/pwa-sources-messageboxmodule.git
+[submodule "source/qrdisplaymodule"]
+	path = source/qrdisplaymodule
+	url = git@github.com:JhonnyJason/pwa-sources-qrdisplaymodule.git
+[submodule "source/qrreadermodule"]
+	path = source/qrreadermodule
+	url = git@github.com:JhonnyJason/pwa-sources-qrreadermodule.git
+[submodule "statemodule"]
+	path = statemodule
+	url = git@github.com:JhonnyJason/pwa-sources-statemodule.git
