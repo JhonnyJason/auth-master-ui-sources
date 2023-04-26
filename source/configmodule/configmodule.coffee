@@ -1,6 +1,7 @@
 ############################################################
 # Default Backend Options
-export backendOptions = [
+export defaultServerOptions = [
     "https://localhost:6969"
+    "https://localhost:6999"
 ]
-export defaultSecretManagerChoice = 0
+export defaultServerChoice = 0

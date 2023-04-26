@@ -1,6 +1,6 @@
 {
-    "name": "New Website",
-    "short_name": "N",
+    "name": "Auth Master UI",
+    "short_name": "AuthM",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",
@@ -14,7 +14,7 @@
         }
     ],
     "start_url": "/",
-    "theme_color": "#ffffff",
+    "theme_color": "#ABA7AA",
     "background_color": "#ffffff",
     "display": "standalone"
 }

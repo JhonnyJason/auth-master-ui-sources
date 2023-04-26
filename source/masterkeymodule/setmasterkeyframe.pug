@@ -1,0 +1,14 @@
+//- acceptcodeframe structure
+#setmasterkeyframe
+    //- #acceptcode-inputs
+    label#floating-secret-label(for="floating-secret") Floating Secret 
+    input#floating-secret-input(type="password" name="floating-secret")
+    #key-id-display
+    label#alias-label ID Alias 
+    input#alias-input
+
+    #acceptcode-buttons 
+        #cancel-button.click-button
+            svg: use(href="#svg-cross-icon")
+        #accept-button.click-button
+            svg: use(href="#svg-check-icon")

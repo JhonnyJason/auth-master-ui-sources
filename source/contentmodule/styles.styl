@@ -1,53 +1,43 @@
 // content styles
 #content
-    position absolute
-    top 0
-    left 0
+    position relative
     width 100%
     height 100%
-    padding 20px 0
-    box-sizing: border-box
-    transition: opacity 0.3s
-    overflow: hidden
 
-#content
-    text-align left
-    .click-button
-        padding 7px 10px
-        // display block
-        min-width 180px
-        margin-left 15px
-        background-color #808080
-        color white
-        font-weight bold
-        border-radius: 3px
-    input
-        display block
-        color black
-        margin-left auto
-        margin-right auto
-        box-sizing: border-box
-        overflow: hidden
-        text-overflow: ellipsis
-        border solid 1px #808080
-        width calc(100% - 30px)
+#overlay-frame
+    position absolute
+    width 100%
+    height 100%
+    top 0
+    left 0
 
-#add-remove-client-container > *
-    margin-bottom 5px
-#add-remove-client-container
-    margin-bottom 50px
+// #scroll-frame
+//     position absolute
+//     display flex
+//     width 100%
+//     height 100%
+//     top 0
+    
+//     left 0
+//     z-index 10
+//     overflow-x auto
+    
+//     scroll-snap-type x mandatory
+    
+// #scroll-frame > *
+//     flex-shrink: 0
+//     scroll-snap-align: start;
+//     height 100%
+//     width 100vw
 
+// @media (min-aspect-ratio: 0.9 ) and (min-width: 700px)
+//     #scroll-frame > *
+//         width 50vw
 
-#clients-to-serve-list
-    width calc(100% - 30px)
-    margin-left auto
-    margin-right auto
+// @media (min-aspect-ratio: 1.4 ) and (min-width: 1050px)
+//     #scroll-frame > *
+//         width 33.33vw
 
-    li
-        color black
-        margin-left 20px
-        list-style: circle
-        padding-top: 7px
-
-#display-clients-container
-    margin-bottom: 100px
+// @media (min-aspect-ratio: 1.9 ) and (min-width: 1400px)
+//     #scroll-frame > *
+//         width 25vw

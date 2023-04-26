@@ -1,17 +1,7 @@
 //- content structure
-#content
-    #add-remove-client-container
-        input#client-id-input(type="text" placeholder="Client Id")
-        button#add-client-button.click-button Add Client To Serve
-        button#remove-client-button.click-button Remove Client to Serve
-    
-    #display-clients-container
-        button#get-clients-button.click-button Get Clients to Serve 
-        ul#clients-to-serve-list
-
-    #test-regular-operations-container
-        button#latest-orders-button.click-button getLatestOrders
-        button#latest-tickers-button.click-button getLatestTickers
-        button#latest-balances-button.click-button getLatestBalances
-
-    #display-regular-operations-response-container
+#content.no-master-key
+    #overlay-frame
+        include ../masterkeymodule/setmasterkeyframe.pug
+        //- include ../
+    //- #scroll-frame
+    //-     include ../addcodebuttonmodule/addcodebutton.pug
