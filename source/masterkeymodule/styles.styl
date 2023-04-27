@@ -1,9 +1,5 @@
 // acceptcodeframe styles
-button-size = 80px
-
-.input-error
-    input
-        border solid 2px red
+button-size = 40px
 
 .no-master-key
     #setmasterkeyframe
@@ -24,45 +20,59 @@ button-size = 80px
     pointer-events: none
     display: flex
     flex-direction: column
-    justify-content: space-around
+    justify-content: space-between
+    h1
+        font-size: 24pt
+        text-align: right
+        // text-decoration: underline
     label
-        font-size 16pt
-    textarea
-        padding 40px
-        font-size 16pt
+        font-size 12pt
+        display block
+        text-align: left
+        margin-bottom 5px
     input
+        display block
         font-size 16pt
+        padding 12px
+        box-sizing: border-box
         text-align: center
+        width 100%
+        background alpha(#024, 0.5)
+        color #fff
+        border-bottom solid 2px rgb(0, 64, 133)
+    input.okay
+        border-bottom solid 2px rgb(13, 133, 0)
+    input.error
+        border-bottom solid 2px rgb(133, 0, 0)
+    input.typing
+        border-bottom solid 2px rgb(133, 51, 0)
+    
+    #key-id-display
+        font-size: 10pt
+        padding 20px 12px
+        overflow hidden
+        text-overflow: ellipsis
+        margin-bottom 10px
+        background-color #000
+        margin-bottom 20px
+    .passive
+        opacity 0.2
+        pointer-events: none
 
-#acceptcode-buttons
-    position relative
-    height 20%
-    width 100%
 
-
-#cancel-button
-    cursor: pointer
-    position absolute
-    left 0
-    top 50%
-    transform translateY(-50%)
-    width button-size
-    height button-size
-    background-color #024c
-    border-radius: 20px
-    svg
-        width: inherit
-        height: inherit
 #accept-button
+    margin-top 50px
+    width 200px
+    font-size: 20pt
+    padding 12px
+    box-sizing: border-box
+    position: relative
     cursor: pointer
-    position absolute
-    right 0
-    top 50%
-    transform translateY(-50%)
-    width button-size
-    height button-size
     background-color #024c
     border-radius: 20px
     svg
-        width: inherit
-        height: inherit
+        position absolute
+        top 0
+        right 20px
+        width: 40px
+        height: 40px

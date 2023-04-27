@@ -1,4 +1,10 @@
 // clientmanager styles
+.manage-clients
+    #clientmanager
+        z-index 20
+        opacity 1
+        pointer-events: all
+
 #clientmanager
     position absolute
     top 0
@@ -10,6 +16,9 @@
     transition: opacity 0.3s
     overflow: hidden
     background-color: alpha(#000, 0.2)
+    opacity: 0
+    pointer-events: none
+    z-index 0
 
 #clientmanager
     text-align left

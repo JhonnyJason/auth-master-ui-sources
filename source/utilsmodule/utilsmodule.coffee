@@ -5,6 +5,7 @@ import { createLogFunctions } from "thingy-debug"
 #endregion
 
 ############################################################
+import * as secUtl from "secret-manager-crypto-utils"
 import * as tbut from "thingy-byte-utils"
 import * as msgBox from "./messageboxmodule"
 
