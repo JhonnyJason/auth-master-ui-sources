@@ -1,7 +1,7 @@
 // acceptcodeframe styles
 button-size = 40px
 
-.no-master-key
+.set-master-key
     #setmasterkeyframe
         z-index: 20
         opacity 1
@@ -11,6 +11,8 @@ button-size = 40px
     position relative
     padding 30px
     width 100%
+    // max-width: 600px
+    // margin-left auto
     height 100%
     box-sizing: border-box
     z-index 0
@@ -23,7 +25,11 @@ button-size = 40px
     justify-content: space-between
     h1
         font-size: 24pt
+        line-height: 120%
         text-align: right
+        background-color #024c
+        padding 20px
+        margin -30px -30px 0 -30px
         // text-decoration: underline
     label
         font-size 12pt
@@ -47,21 +53,43 @@ button-size = 40px
     input.typing
         border-bottom solid 2px rgb(133, 51, 0)
     
-    #key-id-display
-        font-size: 10pt
-        padding 20px 12px
-        overflow hidden
-        text-overflow: ellipsis
-        margin-bottom 10px
-        background-color #000
-        margin-bottom 20px
+
     .passive
         opacity 0.2
         pointer-events: none
 
 
+#happy-smiley
+    // display none
+    margin auto
+    height 70px
+    width 70px
+    // color #024
+    color #fff
+    opacity: 0.2
+    svg
+        height inherit
+        width inherit
+
+#key-id-display
+    font-size: 10pt
+    padding 20px 12px
+    overflow hidden
+    text-overflow: ellipsis
+    background-color #000
+
+#storage-id-display
+    font-size 7pt
+    text-align: right
+    overflow hidden
+    text-overflow: ellipsis
+    padding 3px
+    margin 0
+    margin-bottom 20px
+
 #accept-button
     margin-top 50px
+    margin-bottom 20px
     width 200px
     font-size: 20pt
     padding 12px
@@ -69,10 +97,59 @@ button-size = 40px
     position: relative
     cursor: pointer
     background-color #024c
-    border-radius: 20px
+    border-radius: 15px
     svg
         position absolute
         top 0
         right 20px
         width: 40px
         height: 40px
+
+.main-view
+    #masterkeydisplay
+        z-index 22
+        opacity 1
+        pointer-events: all
+
+#masterkeydisplay
+    position: absolute
+    top 0
+    left 0
+    width: 100%
+    // width calc(100% - 10px)
+    // border-radius: 5px
+    // margin 5px
+    padding 15px
+    box-sizing: border-box
+    background-color: #024c
+    display flex
+    align-items: center
+    opacity 0
+    pointer-events: none
+    transition: opacity 0.3s
+
+    .key-icon
+        height 30px
+        width 30px
+        svg
+            height inherit
+            width inherit
+
+    .key-info
+        text-align: left
+        padding 0 20px
+        box-sizing: border-box
+        overflow: hidden
+    .key-info > *
+        overflow: hidden
+        text-overflow: ellipsis
+
+#masterkey-alias
+    font-size 24pt
+    margin-bottom 7px
+#masterkey-id
+    font-size 11pt
+
+#masterkey-storage-id
+    font-size 7pt
+    text-align: right 

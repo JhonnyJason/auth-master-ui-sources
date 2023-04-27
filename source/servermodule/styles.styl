@@ -1,5 +1,133 @@
 // server styles
-#server
+
+#server-entry-hidden-template
+    display none
+
+.main-view
+    #serverchoicecontainer
+        z-index: 20
+        opacity 1
+        pointer-events: all
+
+#serverchoicecontainer
+    position relative
+    padding 100px 10px
     width 100%
-    min-height 20px
-    background-color rgba(0, 0, 0, 0.2)
+    height 100% 
+    overflow-y auto
+    box-sizing: border-box
+    z-index 0
+    opacity: 0
+    transition opacity 0.3s
+    // background-color: blue
+    pointer-events: none
+    // display: flex
+    // flex-direction: column
+    // justify-content: space-between
+    display grid
+    gap 30px
+    grid-template-columns: repeat( auto-fit, minmax(260px, 1fr) )
+
+    .server-entry
+        border-radius: 15px
+        background-color alpha(#024, 0.6)
+        padding 20px
+        overflow: hidden
+        height fit-content
+    .server-icon
+        height 60px
+        width 60px
+        svg
+            height inherit
+            width inherit
+    .server-info
+        text-align left
+        padding-left 20px
+        overflow: hidden
+    .server-name
+        font-size 20pt
+        margin-bottom 10px
+    .server-url
+        margin-bottom 10px
+        overflow: hidden
+        text-overflow: ellipsis
+    .server-id
+        overflow: hidden
+        text-overflow: ellipsis
+    .entry-top
+        display flex
+        align-items: center
+    .entry-bottom
+        display flex
+        justify-content: space-between
+        align-items: center
+        margin-top 30px
+
+    .manage-clients-button
+        border-radius: 15px
+        background-color #024c
+        padding 30px
+        svg
+            height 50px
+            width 50px
+    .delete-button
+        border-radius: 15px
+        background-color#300c
+        padding 20px
+        height fit-content
+        svg
+            height 30px
+            width 30px
+
+.main-view
+    #addserverbutton
+        z-index 22
+        opacity 1
+        pointer-events: all
+
+// #addserverbutton
+//     display flex
+//     position: absolute
+//     bottom 10px
+//     right 20px
+//     width 240px
+//     margin-left auto
+//     box-sizing: border-box
+//     padding 15px
+//     background-color: #024c
+//     align-items: center
+//     opacity 0
+//     pointer-events: none
+//     transition: opacity 0.3s
+//     border-radius: 15px
+//     box-shadow: 3px 3px 10px alpha(#000, 0.4) 
+
+//     .add-icon
+//         height 50px
+//         width 50px
+//         svg
+//             height inherit
+//             width inherit
+
+//     .add-label
+//         font-size: 20pt
+//         padding 10px
+
+#addserverbutton
+    display block
+    position: absolute
+    bottom 10px
+    right 20px
+    color: #024c
+    opacity 0
+    pointer-events: none
+    transition: opacity 0.3s
+    border-radius: 50%
+    height 60px
+    width 60px
+    // background-color white
+    // box-shadow: 3px 3px 10px alpha(#000, 0.4) 
+    
+    svg
+        height inherit
+        width inherit

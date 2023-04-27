@@ -1,2 +1,23 @@
 //- server structure
-#server
+#server-entry-hidden-template
+    .server-entry
+        .entry-top
+            .server-icon: svg: use(href="#svg-server-icon")
+            .server-info 
+                .server-name Master Bot
+                .server-url https://master-bot.dotv.ee
+                .server-id 0x23456789345678934567890345678934567
+        .entry-bottom
+            .manage-clients-button.click-button: svg: use(href="#svg-manage-clients-icon")
+            .delete-button.click-button: svg: use(href="#svg-trash-icon")
+
+
+#serverchoicecontainer
+
+
+//- #addserverbutton.click-button
+//-     .add-icon: svg: use(href="#svg-add-icon")
+//-     .add-label Add Server
+
+#addserverbutton.click-button
+    svg: use(href="#svg-add-icon")

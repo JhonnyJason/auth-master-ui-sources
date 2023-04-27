@@ -22,7 +22,6 @@ export initialize = ->
 ############################################################
 saveAliases = ->
     log "saveAliases"
-    if Object.keys(aliasToId).length == 0 then return
     encrypted = await crypto.encrypt(JSON.stringify(aliasToId))
     S.save(storageId, encrypted, true)
     return
@@ -67,8 +66,8 @@ export setAliasForId = (alias, id) ->
 
     # unset
     oldAlias = idsToAlias[id]
-    if aliasToId[oldAlias] == id? then delete aliasToId[oldAlias]
-    
+    if aliasToId[oldAlias] == id then delete aliasToId[oldAlias]
+
     # set
     aliasToId[alias] = id
     idsToAlias[id] = alias

@@ -1,8 +1,10 @@
 //- content structure
-#content.no-master-key
+//- #content.set-master-key
+#content.main-view
     #overlay-frame
         include ../masterkeymodule/setmasterkeyframe.pug
         include ../clientmanagermodule/clientmanager.pug
         //- include ../
-    //- #scroll-frame
-    //-     include ../addcodebuttonmodule/addcodebutton.pug
+    #main-frame
+        include ../masterkeymodule/masterkeydisplay.pug
+        include ../servermodule/server.pug

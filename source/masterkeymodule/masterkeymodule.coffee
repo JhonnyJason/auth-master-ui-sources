@@ -12,52 +12,88 @@ import * as secUtl from "secret-manager-crypto-utils"
 import * as utl from "./utilsmodule.js"
 import * as alias from "./aliasmodule.js"
 import * as msgBox from "./messageboxmodule.js"
+import * as server from "./servermodule.js"
 
 ############################################################
+#region internal variables
+
 cryptoNode = null
 context = "Auth Master UI" 
-
 
 ############################################################
 masterKey = ""
 masterKeyId = ""
 masterKeyAlias = ""
+
+############################################################
 storageId = ""
 
-typingFloatingSecret = false
-typingAlias = false
+############################################################
+floatingSecretBaseClassName = ""
+currentFloatingSecret = ""
+
+aliasBaseClassName = ""
+currentAlias = ""
+
+#endregion
 
 ############################################################
 export initialize = ->
     log "initialize"
     floatingSecretInput.addEventListener("change", floatingSecretChanged)
-    floatingSecretInput.addEventListener("keydown", floatingSecretKeyDowned)
+    floatingSecretInput.addEventListener("keyup", floatingSecretKeyUpped)
+    # floatingSecretInput.addEventListener("keydown", floatingSecretKeyDowned)
     aliasInput.addEventListener("change", aliasChanged)
-    aliasInput.addEventListener("keydown", aliasKeyDowned)
+    aliasInput.addEventListener("keyup", aliasKeyUpped)
+    # aliasInput.addEventListener("keydown", aliasKeyDowned)
+
+    acceptButton.addEventListener("click", acceptButtonClicked)
+    masterkeydisplay.addEventListener("click", keyDisplayClicked)
+    return
+
+############################################################
+keyDisplayClicked = ->
+    log "keyDisplayClicked"
+    content.className = "set-master-key"
+    return
+
+acceptButtonClicked = ->
+    log "acceptButtonClicked"
+    await server.loadForStorageId(storageId)
+    content.className = "main-view"
+
+    masterkeyAlias.innerHTML = masterKeyAlias
+    masterkeyId.innerHTML = "0x#{masterKeyId}"
+    masterkeyStorageId.innerHTML = storageId
 
     return
 
 ############################################################
-floatingSecretKeyDowned = ->
-    log "floatingSecretKeyDowned"
-    return if typingFloatingSecret
-    typingFloatingSecret = true
-    floatingSecretInput.className = "typing"
+floatingSecretKeyUpped = ->
+    log "floatingSecretKeyUpped"
+    if currentFloatingSecret == floatingSecretInput.value
+        floatingSecretInput.className = floatingSecretBaseClassName
+    else
+        floatingSecretInput.className = "typing"
     return
 
-aliasKeyDowned = ->
-    log "aliasKeyDowned"
-    return if typingAlias
-    typingAlias = true
-    aliasInput.className = "typing"
+aliasKeyUpped = ->
+    log "aliasKeyUpped"
+    if currentAlias == aliasInput.value
+        aliasInput.className = aliasBaseClassName
+    else
+        aliasInput.className = "typing"
     return
 
+############################################################
 floatingSecretChanged = ->
     log "floatingSecretChanged"
-    typingFloatingSecret = false
-    floatingSecretInput.className = "okay"
 
-    masterKey = await utl.seedToKey(floatingSecretInput.value)
+    floatingSecretInput.className = "okay"
+    floatingSecretBaseClassName = "okay"
+    currentFloatingSecret = floatingSecretInput.value
+
+    masterKey = await utl.seedToKey(currentFloatingSecret)
     masterKeyId = await secUtl.createPublicKey(masterKey)
     storageId = await secUtl.sha256Hex("#{context}_#{masterKeyId}")
     options = {
@@ -75,16 +111,18 @@ floatingSecretChanged = ->
 
 aliasChanged = ->
     log "aliasChanged"
-    masterKeyAlias = aliasInput.value
+    currentAlias = aliasInput.value
+    masterKeyAlias = currentAlias
+
     try 
         alias.setAliasForId(masterKeyAlias, masterKeyId)
-        typingAlias = false
         aliasInput.className = "okay"
+        aliasBaseClassName = "okay"
     catch err
         log err
         msgBox.error(err.message)
-        typingAlias = false
         aliasInput.className = "error"
+        aliasBaseClassName = "error"
 
     return
 
@@ -94,8 +132,12 @@ activateAndFillBottomGroup = ->
     if passiveGroup? then passiveGroup.classList.remove("passive")
 
     keyIdDisplay.innerHTML = "0x#{masterKeyId}"
+    storageIdDisplay.innerHTML = "#{storageId}"
     if masterKeyAlias then aliasInput.value = masterKeyAlias
-    else aliasInput.setAttribute("placeholder", "Define Alias")
+    else 
+        aliasInput.setAttribute("placeholder", "Define Alias")
+        aliasInput.value = ""
+
     return
 
 ############################################################
