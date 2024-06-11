@@ -6,6 +6,7 @@ module.exports = {
             "vanillaqr": "^1.0.0",
             "qr-scanner": "^1.4.2",
             "thingy-byte-utils": "^0.0.8",
+            "thingy-crypto-node": "^0.0.1",
             "thingy-post-rpc-client": "^0.0.2",
             "thingy-rpc-authmaster-client": "^0.0.4"
         }

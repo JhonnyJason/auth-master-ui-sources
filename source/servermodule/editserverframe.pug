@@ -1,0 +1,19 @@
+#editserverframe
+    h1 Server Details
+    .group
+        label#server-name-label(for="server-name") Server Name 
+        input#server-name-input(type="text" name="server-name")
+        label#server-url-label(for="server-url") Server URL 
+        input#server-url-input(type="text" name="server-url")
+        label#stated-server-id-label Stated Server Id
+        #stated-server-id-display 
+        label#server-id-label(for="server-id") Server Id 
+        input#server-id-input(type="text" name="server-id")
+
+    .group
+        .happy-smiley: svg: use(href="#svg-smile-edgy-icon")
+        //- #happy-smiley: svg: use(href="#svg-smile-smirk-icon")
+    #button-line.group
+        button#cancel-edit-button.click-button Cancel
+        button#accept-edit-button.click-button.passive Accept
+            //- svg: use(href="#svg-check-icon")

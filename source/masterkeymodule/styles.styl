@@ -1,4 +1,6 @@
-// acceptcodeframe styles
+/*==========================================================
+Set Master Key Frame
+==========================================================*/
 button-size = 40px
 
 .set-master-key
@@ -8,7 +10,9 @@ button-size = 40px
         pointer-events: all
 
 #setmasterkeyframe
-    position relative
+    position absolute
+    top 0
+    left 0
     padding 30px
     width 100%
     // max-width: 600px
@@ -58,19 +62,6 @@ button-size = 40px
         opacity 0.2
         pointer-events: none
 
-
-#happy-smiley
-    // display none
-    margin auto
-    height 70px
-    width 70px
-    // color #024
-    color #fff
-    opacity: 0.2
-    svg
-        height inherit
-        width inherit
-
 #key-id-display
     font-size: 10pt
     padding 20px 12px
@@ -87,7 +78,7 @@ button-size = 40px
     margin 0
     margin-bottom 20px
 
-#accept-button
+#accept-use-button
     margin-top 50px
     margin-bottom 20px
     width 200px
@@ -104,6 +95,10 @@ button-size = 40px
         right 20px
         width: 40px
         height: 40px
+
+/*==========================================================
+Main View - Master Key Display
+==========================================================*/
 
 .main-view
     #masterkeydisplay

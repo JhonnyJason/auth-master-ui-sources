@@ -6,6 +6,7 @@ import { createLogFunctions } from "thingy-debug"
 
 ############################################################
 import { ThingyCryptoNode } from "thingy-crypto-node"
+import { RPCAuthMasterClient } from "thingy-rpc-authmaster-client"
 import * as secUtl from "secret-manager-crypto-utils"
 
 ############################################################
@@ -35,6 +36,9 @@ currentFloatingSecret = ""
 aliasBaseClassName = ""
 currentAlias = ""
 
+############################################################
+allAuthMasterClients = new Map()
+
 #endregion
 
 ############################################################
@@ -47,7 +51,7 @@ export initialize = ->
     aliasInput.addEventListener("keyup", aliasKeyUpped)
     # aliasInput.addEventListener("keydown", aliasKeyDowned)
 
-    acceptButton.addEventListener("click", acceptButtonClicked)
+    acceptUseButton.addEventListener("click", acceptButtonClicked)
     masterkeydisplay.addEventListener("click", keyDisplayClicked)
     return
 
@@ -144,3 +148,23 @@ activateAndFillBottomGroup = ->
 export encrypt = (content) -> cryptoNode.encrypt(content)
 
 export decrypt = (encrypted) -> cryptoNode.decrypt(encrypted)
+
+
+############################################################
+export getAuthMasterClient = (serverURL, serverId) ->
+    serverURL = "#{serverURL}/thingy-post-rpc"
+    mapKey = "#{serverId}:#{serverURL}"
+
+    client = allAuthMasterClients.get(mapKey)
+    if client? then return client
+
+    secretKeyHex = cryptoNode.key
+    publicKeyHex = cryptoNode.id
+
+    options = {serverURL, serverId, secretKeyHex, publicKeyHex}
+    
+    olog options
+
+    client = new RPCAuthMasterClient(options)
+    allAuthMasterClients.set(mapKey, client)
+    return client

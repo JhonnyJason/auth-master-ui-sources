@@ -3,6 +3,114 @@
 #server-entry-hidden-template
     display none
 
+/*==========================================================
+Edit Server Frame
+==========================================================*/
+
+button-size = 40px
+
+.edit-server
+    #editserverframe
+        z-index: 20
+        opacity 1
+        pointer-events: all
+
+#editserverframe
+    position absolute
+    top 0
+    left 0
+    padding 30px
+    width 100%
+    // max-width: 600px
+    // margin-left auto
+    height 100%
+    box-sizing: border-box
+    z-index 0
+    opacity: 0
+    transition opacity 0.3s
+    background-color #000c
+    pointer-events: none
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    h1
+        font-size: 24pt
+        line-height: 120%
+        text-align: right
+        background-color #024c
+        padding 20px
+        margin -30px -30px 0 -30px
+        // text-decoration: underline
+    label
+        font-size 12pt
+        display block
+        text-align: left
+        margin-bottom 5px
+        margin-top 20px
+    input
+        display block
+        font-size 16pt
+        padding 12px
+        box-sizing: border-box
+        text-align: center
+        width 100%
+        background alpha(#024, 0.5)
+        color #fff
+        border-bottom solid 2px rgb(0, 64, 133)
+    input.okay
+        border-bottom solid 2px rgb(13, 133, 0)
+    input.error
+        border-bottom solid 2px rgb(133, 0, 0)
+    input.typing
+        border-bottom solid 2px rgb(133, 51, 0)
+    
+
+    .passive
+        opacity 0.2
+        pointer-events: none
+
+
+#stated-server-id-display
+    font-size: 10pt
+    padding 20px 12px
+    overflow hidden
+    text-overflow: ellipsis
+    background-color #000
+
+#button-line
+    display flex
+    justify-content: space-around
+    align-items: center
+    // margin-top 50px
+    margin-bottom 20px
+
+#accept-edit-button
+    width 130px
+    font-size: 18pt
+    padding 12px
+    box-sizing: border-box
+    position: relative
+    cursor: pointer
+    background-color #024c
+    color #fff
+    border-radius: 15px
+
+#cancel-edit-button
+    width 130px
+    font-size: 18pt
+    padding 12px
+    box-sizing: border-box
+    position: relative
+    cursor: pointer
+    background-color #300c
+    color #fff
+    border-radius: 15px
+
+
+/*==========================================================
+Main View - Server Choice Container
+==========================================================*/
+
 .main-view
     #serverchoicecontainer
         z-index: 20
