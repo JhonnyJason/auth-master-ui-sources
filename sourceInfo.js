@@ -1,6 +1,7 @@
 module.exports = {
     getDependencies: () => {
         return {
+            "navhandler": "^0.0.4",
             "mustache": "^4.2.0",
             "secret-manager-crypto-utils": "^0.3.0",
             "vanillaqr": "^1.0.0",

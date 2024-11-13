@@ -10,3 +10,14 @@ export initialize = ->
     log "initialize"
     return
 
+
+
+############################################################
+export setToNoServerState = ->
+    log "setToNoServerState"
+    return
+
+############################################################
+export setToDisplayServerState = -> 
+    log "setToDisplayServerState"
+    return
