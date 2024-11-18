@@ -14,13 +14,32 @@ import * as S from "./statemodule.js"
 ## Navigation Action Triggers
 
 ############################################################
-export home = ->
-    return nav.toRoot(true)
-    
+export mainView = ->
+    return nav.toBaseAt("display-servers", null, 1)
+
 ############################################################
-export menu = (menuOn) ->
-    if menuOn then return nav.toMod("menu")
-    else return nav.toMod("none")
+export editServer = (ctx) ->
+    return nav.toBaseAt("edit-server", ctx, 2)
+
+export deleteServer = (ctx) ->
+    return nav.toMod("delete-confirmation", ctx)
+
+export manageServer = (ctx) ->
+    return nav.toBaseAt("manage-server", ctx, 2)
+
+
+############################################################
+export reset = ->
+    return nav.toRoot(true)
+
+############################################################
+export back = ->
+    return nav.back(1)
+    
+# ############################################################
+# export menu = (menuOn) ->
+#     if menuOn then return nav.toMod("menu")
+#     else return nav.toMod("none")
  
 # ############################################################
 # export requestCode = ->

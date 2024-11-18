@@ -8,9 +8,14 @@ import { createLogFunctions } from "thingy-debug"
 import * as nav from "navhandler"
 import * as S from "./statemodule.js"
 
+############################################################
 import * as uiState from "./uistatemodule.js"
 import * as triggers from "./navtriggers.js"
 import * as servers from "./servermodule.js"
+import * as masterKey from "./masterkeymodule.js"
+
+############################################################
+import * as deleteConfirmation from "./deleteconfirmation.js"
 
 import { appVersion } from "./configmodule.js"
 
@@ -25,7 +30,7 @@ newVersion = document.getElementById("new-version")
 menuVersion = document.getElementById("menu-version")
 
 ############################################################
-appBaseState = "no-servers"
+appBaseState = "no-masterkey"
 appUIMod = "none"
 
 
@@ -43,32 +48,25 @@ export initialize = ->
         serviceWorker.addEventListener("message", onServiceWorkerMessage)
         serviceWorker.addEventListener("controllerchange", onServiceWorkerSwitch)
 
-    S.addOnChangeListener("allServers", updateBaseState)
-    return
-
-############################################################
-updateBaseState = ->
-    log "updateBaseState"
-    allServers = S.get("allServers")
-    if allServers? and isArray(allServers) and allServers.length > 0
-        appBaseState = "display-servers"
-    else appBaseState = "no-servers"
     return
 
 ############################################################
 loadWithNavState = (navState) ->
     log "loadWithNavState"
-    baseState = navState.base
-    modifier = navState.modifier
-    context = navState.context
-    S.save("navState", navState)
-
-    setUIState()
+    olog navState
+    if !masterKey.isSet() and navState.depth != 0 then return triggers.reset()
+    else updateNavState(navState)
     return
 
 ############################################################
 updateNavState = (navState) ->
     log "navStateUpdate"
+    baseState = navState.base
+    modifier = navState.modifier
+    context = navState.context
+    S.save("navState", navState)
+
+    setUIState(baseState, modifier, context)
     return
 
 
@@ -76,77 +74,16 @@ updateNavState = (navState) ->
 #region internal Functions
 setUIState = (base, mod, ctx) ->
     log "setUIState"
-
-    switch base
-        when "RootState"
-            if accountAvailable then base = "user-images"
-            else base = "no-code"
-        when "screenings-list" 
-            if appBaseState != "screenings-list" 
-                screeningsList.updateScreenings()
-
-    ########################################
-    setAppState(base, mod)
-
-    switch mod
-        when "logoutconfirmation" then confirmLogoutProcess()
-        when "invalidcode" then invalidCodeProcess()
-        when "codeverification"
-            if urlCode? then await urlCodeDetectedProcess()
-            else nav.toMod("none")
     
+    ## If we are in RootState we never have a masterKey
+    ## no modifiers are possible
+    if base == "RootState"
+        base = "no-masterkey"
+        mod = "none"
 
-    ########################################
-    # setAppState(base, mod)
-    return
+    setAppState(base, mod, ctx)
 
-############################################################
-#region Event Listeners
-
-loadAppWithNavState = (navState) ->
-    log "loadAppWithNavState"
-    await startUp()
-
-    setUIState(baseState, modifier, context)
-    return
-
-############################################################
-setNavState = (navState) ->
-    log "setNavState"
-    baseState = navState.base
-    modifier = navState.modifier
-    context = navState.context
-    S.save("navState", navState)
-
-    # reset always
-    accountToUpdate = null
-    
-    setUIState(baseState, modifier, context)
-    return
-
-#endregion
-
-############################################################
-startUp = ->
-    log "startUp"    
-    await checkAccountAvailability()
-    if accountAvailable then await prepareAccount()
-
-    updateUIData()
-    return
-
-############################################################
-checkAccountAvailability = ->
-    log "checkAccountAvailability"
-    try 
-        await account.getUserCredentials()
-        accountAvailable = true
-        return # return fast if we have an account
-    catch err then log err
-    # log "No Account Available"
-    
-    # no account available
-    accountAvailable = false
+    if mod == "delete-confirmation" then deleteConfirmationProcess(ctx)
     return
 
 ############################################################
@@ -159,13 +96,14 @@ updateUIData = ->
     return
 
 ############################################################
-setAppState = (base, mod) ->
+setAppState = (base, mod, ctx) ->
     log "setAppState"
     if base then appBaseState = base
     if mod then appUIMod = mod
     log "#{appBaseState}:#{appUIMod}"
+    olog ctx
 
-    uiState.applyUIState(appBaseState, appUIMod)
+    uiState.applyUIState(appBaseState, appUIMod, ctx)
     return
     
 ############################################################
@@ -189,6 +127,18 @@ onServiceWorkerSwitch = ->
 
 ############################################################
 #region User Interaction Processes
+deleteConfirmationProcess = (ctx) ->
+    log "deleteConfirmationProcess"
+    try
+        if !ctx.index? then throw new Error("called deleteConfirmationProcess without server index to delete")
+
+        await deleteConfirmation.userConfirmation()
+        log "user confirmed!"
+        await servers.deleteServer(ctx.index)
+        log "server deleted!"
+    catch err then log err
+    finally triggers.mainView()
+    return
 
 urlCodeDetectedProcess = ->
     log "urlCodeDetectedProcess"

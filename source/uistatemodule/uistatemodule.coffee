@@ -7,7 +7,11 @@ import { createLogFunctions } from "thingy-debug"
 ############################################################
 #region imported UI modules
 import * as content from "./contentmodule.js"
-# import * as menu from "./menumodule.js"
+import * as servers from "./servermodule.js"
+import * as masterKey from "./masterkeymodule.js"
+
+## User Modals
+import * as deleteConfirmation from "./deleteconfirmation.js"
 
 #endregion
 
@@ -23,19 +27,28 @@ currentContext = null
 ############################################################
 #region Base State Application Functions
 
-applyBaseState["no-servers"] = (ctx) ->
-    content.setToNoServerState(ctx)
+applyBaseState["no-masterkey"] = (ctx) ->
+    content.setToNoMasterkeyState(ctx)
+    masterKey.focusFloatingSecretInput()
     return
 
 applyBaseState["display-servers"] = (ctx) ->
     content.setToDisplayServerState(ctx)
+    servers.display()
     return
+
+applyBaseState["edit-server"] = (ctx) ->
+    content.setToEditServerState(ctx)
+    servers.setEditData(ctx)
+    return
+
+
 
 #endregion
 
 ############################################################
 resetAllModifications = ->
-    # menu.setMenuOff()
+    deleteConfirmation.turnDownModal("uiState changed")
     return
 
 ############################################################
@@ -45,9 +58,9 @@ applyModifier["none"] = (ctx) ->
     resetAllModifications()
     return
 
-applyModifier["menu"] = (ctx) ->
+applyModifier["delete-confirmation"] = (ctx) ->
     resetAllModifications()
-    # menu.setMenuOn()
+    deleteConfirmation.turnUpModal(ctx)
     return
 
 

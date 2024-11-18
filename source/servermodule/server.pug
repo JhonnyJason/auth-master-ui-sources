@@ -1,19 +1,25 @@
 //- server structure
-#server-entry-hidden-template
-    .server-entry
+.hidden-templates
+    #server-entry-template-element.server-entry(server-index="{{{index}}}")
         .entry-top
-            .server-icon: svg: use(href="#svg-server-icon")
+            //- .server-icon: svg: use(href="#svg-server-icon")
             .server-info 
-                .server-name Master Bot
-                .server-url https://master-bot.dotv.ee
-                .server-id 0x23456789345678934567890345678934567
+                .server-name {{{server.name}}}
+                .server-url {{{server.url}}}
+                .server-id {{{server.id}}}
+            .server-buttons 
+                .edit-button.click-button: svg: use(href="#svg-edit-icon")
+                .delete-button.click-button: svg: use(href="#svg-trash-icon")
         .entry-bottom
-            .manage-clients-button.click-button: svg: use(href="#svg-manage-clients-icon")
-            .delete-button.click-button: svg: use(href="#svg-trash-icon")
+                .manage-button.click-button 
+                    svg: use(href="#svg-manage-clients-icon")
+                    | Manage Clients
+        
 
-
-#serverchoicecontainer
-
+#server-list.empty
+    #no-server-indication
+        p No Servers Yet.
+    
 
 //- #addserverbutton.click-button
 //-     .add-icon: svg: use(href="#svg-add-icon")

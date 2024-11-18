@@ -4,6 +4,7 @@ import { addModulesToDebug } from "thingy-debug"
 export modulesToDebug = {
 
     appcoremodule: true
+    deleteconfirmation: true
     # aliasmodule: true
     # configmodule: true
     # contentmodule: true

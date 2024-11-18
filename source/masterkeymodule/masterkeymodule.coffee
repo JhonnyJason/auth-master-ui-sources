@@ -13,7 +13,7 @@ import * as secUtl from "secret-manager-crypto-utils"
 import * as utl from "./utilsmodule.js"
 import * as alias from "./aliasmodule.js"
 import * as msgBox from "./messageboxmodule.js"
-import * as server from "./servermodule.js"
+import * as triggers from "./navtriggers.js"
 
 ############################################################
 #region internal variables
@@ -49,7 +49,7 @@ export initialize = ->
     # floatingSecretInput.addEventListener("keydown", floatingSecretKeyDowned)
     aliasInput.addEventListener("change", aliasChanged)
     aliasInput.addEventListener("keyup", aliasKeyUpped)
-    # aliasInput.addEventListener("keydown", aliasKeyDowned)
+    aliasInput.addEventListener("keydown", aliasKeyDowned)
 
     acceptUseButton.addEventListener("click", acceptButtonClicked)
     masterkeydisplay.addEventListener("click", keyDisplayClicked)
@@ -63,13 +63,7 @@ keyDisplayClicked = ->
 
 acceptButtonClicked = ->
     log "acceptButtonClicked"
-    await server.loadForStorageId(storageId)
-    content.className = "main-view"
-
-    masterkeyAlias.innerHTML = masterKeyAlias
-    masterkeyId.innerHTML = "0x#{masterKeyId}"
-    masterkeyStorageId.innerHTML = storageId
-
+    triggers.mainView()
     return
 
 ############################################################
@@ -86,7 +80,11 @@ aliasKeyUpped = ->
     if currentAlias == aliasInput.value
         aliasInput.className = aliasBaseClassName
     else
-        aliasInput.className = "typing"
+        aliasInput.className = "typing"    
+    return
+
+aliasKeyDowned = (evnt) ->
+    if evnt.key == "Enter" then acceptButtonClicked()
     return
 
 ############################################################
@@ -111,6 +109,8 @@ floatingSecretChanged = ->
     masterKeyAlias = alias.getAliasForId(masterKeyId)
     
     activateAndFillBottomGroup()
+    updateMasterKeyHeadline()
+    aliasInput.focus()
     return
 
 aliasChanged = ->
@@ -127,9 +127,11 @@ aliasChanged = ->
         msgBox.error(err.message)
         aliasInput.className = "error"
         aliasBaseClassName = "error"
-
+    
+    updateMasterKeyHeadline()
     return
 
+############################################################
 activateAndFillBottomGroup = ->
     log "activateAndFillBottomGroup"
     passiveGroup = document.getElementsByClassName("passive")[0]
@@ -144,11 +146,20 @@ activateAndFillBottomGroup = ->
 
     return
 
+updateMasterKeyHeadline = ->
+    log "updateMasterKeyHeadline"
+    masterkeyAlias.innerHTML = masterKeyAlias
+    masterkeyId.innerHTML = "0x#{masterKeyId}"
+    masterkeyStorageId.innerHTML = storageId    
+    return
+
+############################################################
+export isSet = -> cryptoNode?
+
 ############################################################
 export encrypt = (content) -> cryptoNode.encrypt(content)
 
 export decrypt = (encrypted) -> cryptoNode.decrypt(encrypted)
-
 
 ############################################################
 export getAuthMasterClient = (serverURL, serverId) ->
@@ -168,3 +179,11 @@ export getAuthMasterClient = (serverURL, serverId) ->
     client = new RPCAuthMasterClient(options)
     allAuthMasterClients.set(mapKey, client)
     return client
+
+############################################################
+export getStorageId = -> storageId
+
+############################################################
+export focusFloatingSecretInput = ->
+    floatingSecretInput.focus()
+    return

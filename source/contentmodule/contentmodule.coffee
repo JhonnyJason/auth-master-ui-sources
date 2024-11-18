@@ -4,20 +4,20 @@ import { createLogFunctions } from "thingy-debug"
 {log, olog} = createLogFunctions("contentmodule")
 #endregion
 
-
 ############################################################
-export initialize = ->
-    log "initialize"
-    return
-
-
-
-############################################################
-export setToNoServerState = ->
-    log "setToNoServerState"
+export setToNoMasterkeyState = ->
+    log "setToNoMasterkeyState"
+    content.className = "set-master-key"
     return
 
 ############################################################
 export setToDisplayServerState = -> 
     log "setToDisplayServerState"
+    content.className = "display-servers"
+    return
+
+############################################################
+export setToEditServerState = ->
+    log "setToEditServerState"
+    content.className = "edit-server"
     return

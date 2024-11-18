@@ -35,6 +35,10 @@ export isValidKey = (key) ->
     for c in key when parseInt(c,16) == NaN then return false
     return true
 
+############################################################
+export clearElement = (el) ->
+    while el.hasChildNodes() then el.removeChild(el.firstChild)
+    return
 
 ############################################################
 export copyToClipboard = (text) ->

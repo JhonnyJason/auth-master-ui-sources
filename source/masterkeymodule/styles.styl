@@ -10,20 +10,9 @@ button-size = 40px
         pointer-events: all
 
 #setmasterkeyframe
-    position absolute
-    top 0
-    left 0
+    @extends .invisible-fullframe
     padding 30px
-    width 100%
-    // max-width: 600px
-    // margin-left auto
-    height 100%
-    box-sizing: border-box
-    z-index 0
-    opacity: 0
-    transition opacity 0.3s
     background-color #000c
-    pointer-events: none
     display: flex
     flex-direction: column
     justify-content: space-between
@@ -100,7 +89,7 @@ button-size = 40px
 Main View - Master Key Display
 ==========================================================*/
 
-.main-view
+.display-servers
     #masterkeydisplay
         z-index 22
         opacity 1

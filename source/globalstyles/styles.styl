@@ -4,12 +4,16 @@
 Color Theme
 ==========================================================*/
 cd-foreground = white
-cd-flash = purple
+cd-flash = #fc4
 cd-background = black
+
+cd-darkblue = #024
+cd-darkred = #300
 
 cd-color = #aba7aa
 
 element-background = #000c
+
 /*==========================================================
 Global Variables
 ==========================================================*/
@@ -46,13 +50,29 @@ p
 /*==========================================================
 General Tag Styles
 ==========================================================*/
+.hidden-templates
+    display none
+
+.invisible-fullframe
+    position absolute
+    top 0
+    left 0
+    width 100%
+    height 100%
+    box-sizing: border-box
+    z-index 0
+    opacity: 0
+    transition opacity 0.3s
+    pointer-events: none
+
+
 .happy-smiley
     // display none
     margin auto
     height 70px
     width 70px
     // color #024
-    color #fff
+    color cd-flash
     opacity: 0.2
     svg
         height inherit
