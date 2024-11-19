@@ -116,7 +116,9 @@ serverUrlChanged = ->
         tempClient = master.getAuthMasterClient(addServerURL)
         serverId = await tempClient.getServerId()
         serverAvailable = true
+        log "Retrieved ServerId #{serverId}"
     catch err 
+        log "received error: #{err.message}"
         if err.rpcCode == NOT_AUTHORIZED
             setErrorMessage("You are no Master of this Server!")
         else setErrorMessage(err.message)
@@ -154,6 +156,7 @@ serverIdChanged = ->
         serverIdBaseClass = ""
         serverIdInput.className = serverIdBaseClass
         return
+    
 
     try
         if addServerId.length < 64 then throw new Error("Invalid Id!")

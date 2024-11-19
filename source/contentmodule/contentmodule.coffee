@@ -21,3 +21,10 @@ export setToEditServerState = ->
     log "setToEditServerState"
     content.className = "edit-server"
     return
+
+############################################################
+export setToManageClientsState = ->
+    log "setToManageClientsState"
+    content.className = "manage-clients"
+    return
+

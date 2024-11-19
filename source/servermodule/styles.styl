@@ -172,22 +172,6 @@ Main View - Server Choice Container
         min-width 150px
         // color cd-flash
 
-    .server-name
-        font-size 20pt
-        vertical-align: middle
-        min-height 40px
-    .server-url
-        margin-bottom 10px
-        overflow: hidden
-        text-overflow: ellipsis
-        vertical-align: middle
-        min-height 20px
-    .server-id
-        font-size 9pt
-        overflow: hidden
-        text-overflow: ellipsis
-        vertical-align: middle
-
     .server-buttons
         flex-grow: 0
 
@@ -228,6 +212,7 @@ Main View - Server Choice Container
             height 23px
             width 23px
             padding-right 5px
+
 .display-servers
     #addserverbutton
         z-index 22
@@ -267,9 +252,11 @@ Main View - Server Choice Container
     position: absolute
     bottom 10px
     right 20px
-    color: #024c
+    color: white
     opacity 0
     pointer-events: none
+    background-color #024c
+
     transition: opacity 0.3s
     border-radius: 50%
     height 60px

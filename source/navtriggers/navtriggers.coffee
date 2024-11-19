@@ -25,7 +25,7 @@ export deleteServer = (ctx) ->
     return nav.toMod("delete-confirmation", ctx)
 
 export manageServer = (ctx) ->
-    return nav.toBaseAt("manage-server", ctx, 2)
+    return nav.toBaseAt("manage-clients", ctx, 2)
 
 
 ############################################################

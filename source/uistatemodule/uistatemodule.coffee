@@ -9,6 +9,7 @@ import { createLogFunctions } from "thingy-debug"
 import * as content from "./contentmodule.js"
 import * as servers from "./servermodule.js"
 import * as masterKey from "./masterkeymodule.js"
+import * as clientManager from "./clientmanagermodule.js"
 
 ## User Modals
 import * as deleteConfirmation from "./deleteconfirmation.js"
@@ -34,12 +35,17 @@ applyBaseState["no-masterkey"] = (ctx) ->
 
 applyBaseState["display-servers"] = (ctx) ->
     content.setToDisplayServerState(ctx)
-    servers.display()
+    servers.display(ctx)
     return
 
 applyBaseState["edit-server"] = (ctx) ->
     content.setToEditServerState(ctx)
     servers.setEditData(ctx)
+    return
+
+applyBaseState["manage-clients"] = (ctx) ->
+    content.setToManageClientsState(ctx)
+    clientManager.setServer(ctx)
     return
 
 
