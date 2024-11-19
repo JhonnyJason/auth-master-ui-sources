@@ -255,6 +255,10 @@ export setServer = (ctx) ->
 
     server = serverModule.getServer(ctx.index)
     
+    managedServerName.textContent = server.name
+    managedServerUrl.textContent = server.url
+    managedServerId.textContent = server.id
+
     createMasterClientForServer(server)
     resetAddFrame()
     updateClients()
